@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/* ======================================= */
+
+.footer-ntc {
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 12px;
+    line-height: 28px;
+}
+
+body {
+  --stripe: #f1e9e9;
+  --bg: #e2d5d5;
+
+  background: linear-gradient(135deg, var(--bg) 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, var(--bg) 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, var(--bg) 25%, transparent 25%),
+    linear-gradient(45deg, var(--bg) 25%, transparent 25%);
+  background-size: 100px 100px;
+  background-color: var(--stripe);
+}
+
+.navbar-nav .dropdown-menu{
+    position: absolute!important;
+}
