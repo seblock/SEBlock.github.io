@@ -1,72 +1,361 @@
-<!doctype html>
-<html lang="en" class="h-100">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/cd228069a2.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <title>Sarah Block</title>
-</head>
-<body class="d-flex flex-row flex-wrap h-100 m-0 p-0">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js" defer></script>
+    <title>SEBlock</title>
+    <!-- credit: https://codepen.io/joyanna/pen/NWGYLNW -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,500&display=swap");
+      :root {
+        --main: crimson;
+        --secondary: lightsalmon;
+        --accent1: pink;
+        --accent2: maroon;
+      }
 
+      body {
+        background: linear-gradient(var(--secondary), var(--main));
+        height: 100vh;
+        font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+        font-family: "DM Mono", monospace;
+        font-weight: 300;
+        overflow: hidden;
+        color: white;
+        text-align: center;
+      }
 
+      h1 {
+        font-size: 3em;
+        margin-bottom: 0.2em;
+      }
 
-    <nav class="w-100 align-self-start navbar navbar-top bg-dark text-white">
-        <div class="container">
-            <a class="navbar-brand text-white" href="#">
-                <h4 class="w-100">Sarah Block</h4>
-                <h6 class="w-100">3rd Semester &#8226; Software Developer</h6>
-            </a>
-            <div class="">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Academic Assignments
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Assignment</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+      h2 {
+        font-size: 2em;
+      }
 
+      .main {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+      }
 
-    <div class="w-100 align-self-center">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="card m-auto" style="max-width: 600px;">
-                        <div class="card-body">
-                            <h3>Title</h3>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nulla suscipit velit aliquam malesuada efficitur. 
-                            Etiam metus enim, hendrerit varius mi ut, posuere feugiat leo. 
-                            Curabitur quis nisi eu tellus tristique hendrerit. 
-                            Curabitur bibendum sodales feugiat. 
-                            Nunc sed lobortis nisi.</p> 
-                            <p>Nullam commodo velit ac erat rhoncus, id egestas eros semper. 
-                            Nunc vel nibh id sapien maximus gravida at eget mauris. 
-                            Donec sit amet ultricies purus, in porta erat. 
-                            Donec maximus sagittis leo, a tristique eros tincidunt malesuada. 
-                            Sed feugiat finibus sapien a dapibus. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      .main:before,
+      .main:after {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -3;
+      }
+      .main:before {
+        right: 0;
+        bottom: -19;
+        height: 30em;
+        width: 30em;
+        border-radius: 30em;
+        background: linear-gradient(var(--secondary), var(--main));
+        align-self: flex-end;
+        animation: gradient-fade 8s ease-in-out 3s infinite alternate;
+      }
+      .main:after {
+        --circle-unit: 10em;
+        top: 0;
+        left: 30;
+        height: var(--circle-unit);
+        width: var(--circle-unit);
+        border-radius: var(--circle-unit);
+        background: linear-gradient(var(--secondary), var(--main));
+        animation: gradient-fade-alt 6s ease-in-out 3s infinite alternate;
+      }
+
+      .main__text-wrapper {
+        position: relative;
+        padding: 2em;
+      }
+      .main__text-wrapper:before,
+      .main__text-wrapper:after {
+        content: "";
+        display: block;
+        position: absolute;
+      }
+
+      .main__text-wrapper:before {
+        --circle-unit: 13em;
+        z-index: -1;
+        top: -3em;
+        right: -3em;
+        width: var(--circle-unit);
+        height: var(--circle-unit);
+        opacity: 0.7;
+        border-radius: var(--circle-unit);
+        background: linear-gradient(var(--accent1), var(--main));
+        animation: rotation 7s linear infinite;
+      }
+
+      .main__text-wrapper:after {
+        --circle-unit: 20em;
+        z-index: -1;
+        bottom: -var(--circle-unit);
+        width: var(--circle-unit);
+        height: var(--circle-unit);
+        border-radius: var(--circle-unit);
+        background: linear-gradient(var(--accent2), var(--main));
+        animation: rotation 7s linear infinite;
+      }
+
+      .arrow {
+        z-index: 1000;
+        opacity: 0.5;
+        position: absolute;
+      }
+      .arrow--top {
+        top: 0;
+        left: -5em;
+      }
+
+      .arrow--bottom {
+        bottom: 0;
+        right: 3em;
+      }
+
+      .circle {
+        transform: translate(50%, -50%) rotate(0deg);
+        transform-origin: center;
+      }
+      .circle--accent1 {
+        --circle-unit: 20em;
+        height: var(--circle-unit);
+        width: var(--circle-unit);
+        border-radius: var(--circle-unit);
+        background: linear-gradient(var(--accent1), var(--secondary));
+      }
+
+      .backdrop {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        display: block;
+        background-color: pink;
+      }
+
+      .dotted-circle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0.3;
+        animation: rotation 38s linear infinite;
+      }
+
+      .draw-in {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 10;
+        animation: draw 15s ease-in-out alternate infinite;
+      }
+
+      @keyframes draw {
+        from {
+          stroke-dashoffset: 1000;
+        }
+
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .item-to {
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        transform-origin: bottom;
+      }
+
+      .bounce-1 {
+        animation-name: bounce-1;
+        animation-timing-function: ease;
+      }
+
+      .bounce-2 {
+        animation-name: bounce-2;
+        animation-timing-function: ease;
+      }
+
+      .bounce-3 {
+        animation-name: bounce-3;
+        animation-timing-function: ease;
+      }
+
+      @keyframes bounce-1 {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(50px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounce-2 {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-30px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounce-3 {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(30px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes rotation {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes gradient-fade {
+        from {
+          transform: translate(10%, -10%) rotate(0deg);
+        }
+        to {
+          transform: translate(50%, -50%) rotate(360deg);
+        }
+      }
+
+      @keyframes gradient-fade-alt {
+        from {
+          transform: translate(-20%, 20%) rotate(0deg);
+        }
+        to {
+          transform: translate(-60%, 60%) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="arrow arrow--top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="270.11"
+        height="649.9"
+        overflow="visible"
+      >
+        <style>
+          .geo-arrow {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+          }
+        </style>
+        <g class="item-to bounce-1">
+          <path
+            class="geo-arrow draw-in"
+            d="M135.06 142.564L267.995 275.5 135.06 408.434 2.125 275.499z"
+          />
+        </g>
+        <circle
+          class="geo-arrow item-to bounce-2"
+          cx="194.65"
+          cy="69.54"
+          r="7.96"
+        />
+        <circle class="geo-arrow draw-in" cx="194.65" cy="39.5" r="7.96" />
+        <circle
+          class="geo-arrow item-to bounce-3"
+          cx="194.65"
+          cy="9.46"
+          r="7.96"
+        />
+        <g class="geo-arrow item-to bounce-2">
+          <path
+            class="st0 draw-in"
+            d="M181.21 619.5l13.27 27 13.27-27zM194.48 644.5v-552"
+          />
+        </g>
+      </svg>
     </div>
-
-    <footer class="w-100 align-self-end footer-ntc">
-        <div class="container h-100 d-flex align-items-center justify-content-center">
-            Copyright <script>document.write(new Date().getFullYear())</script> &#8226; Sarah Block &#8226; All Rights Reserved
-        </div>
-    </footer>
-
-</body>
+    <div class="arrow arrow--bottom">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="31.35"
+        height="649.9"
+        overflow="visible"
+      >
+        <style>
+          .geo-arrow {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+          }
+        </style>
+        <g class="item-to bounce-1">
+          <circle
+            class="geo-arrow item-to bounce-3"
+            cx="15.5"
+            cy="580.36"
+            r="7.96"
+          />
+          <circle class="geo-arrow draw-in" cx="15.5" cy="610.4" r="7.96" />
+          <circle
+            class="geo-arrow item-to bounce-2"
+            cx="15.5"
+            cy="640.44"
+            r="7.96"
+          />
+          <g class="item-to bounce-2">
+            <path
+              class="geo-arrow draw-in"
+              d="M28.94 30.4l-13.26-27-13.27 27zM15.68 5.4v552"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="main">
+      <div class="main__text-wrapper">
+        <h1 class="main__title">SEBlock</h1>
+        <h2>Portfolio in Development</h2>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="dotted-circle"
+          width="352"
+          height="352"
+          overflow="visible"
+        >
+          <circle
+            cx="176"
+            cy="176"
+            r="174"
+            fill="none"
+            stroke="#fff"
+            stroke-width="2"
+            stroke-miterlimit="10"
+            stroke-dasharray="12.921,11.9271"
+          />
+        </svg>
+      </div>
+    </div>
+  </body>
 </html>
